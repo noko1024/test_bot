@@ -14,13 +14,12 @@ async def on_ready():
 
 @client.event
 async def on_message(message):
-    reply_db = open('./bot_db.json','r')
-    prefix = "$"
+    prefix = "%"
 
     if message.content.startswith(prefix):
-        receive_ms = message.content
-        #key = receive_ms.replace(prefix,'')
-        reply = json.load(reply_db)[receive_ms.replace(prefix,'')]
+        with open('./bot_db.json') as reply_db:
+            receive_ms = message.content
+            reply = json.load(reply_db)[receive_ms.replace(prefix,'')]
         await message.channel.send(reply)
         print("send succses:" + reply)
 
