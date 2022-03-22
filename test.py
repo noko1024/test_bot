@@ -17,8 +17,8 @@ async def on_message(message):
     prefix = "%"
 
     if message.content.startswith(prefix):
+        receive_ms = message.content
         with open('./bot_db.json') as reply_db:
-            receive_ms = message.content
             reply = json.load(reply_db)[receive_ms.replace(prefix,'')]
         await message.channel.send(reply)
         print("send succses:" + reply)
